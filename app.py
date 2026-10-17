@@ -30,7 +30,7 @@ def cargar_recursos():
 model, columnas_modelo = cargar_recursos()
 
 # ==============================================================================
-# 3. FUNCIONES DE SINCRONIZACIÓN (SLIDER + INPUT EXACTO)
+# 3. FUNCIONES DE SINCRONIZACIÓN (SLIDER + CASILLA NUMÉRICA)
 # ==============================================================================
 def sync_input(key_num, key_slice):
     st.session_state[key_slice] = st.session_state[key_num]
@@ -38,7 +38,7 @@ def sync_input(key_num, key_slice):
 def sync_slider(key_num, key_slice):
     st.session_state[key_num] = st.session_state[key_slice]
 
-# Inicializar valores por defecto en session_state si no existen
+# Inicialización de variables en session_state
 if 'pv_val' not in st.session_state: st.session_state['pv_val'] = 8.5
 if 'pv_slider' not in st.session_state: st.session_state['pv_slider'] = 8.5
 
@@ -49,7 +49,7 @@ if 'br_val' not in st.session_state: st.session_state['br_val'] = 0.010
 if 'br_slider' not in st.session_state: st.session_state['br_slider'] = 0.010
 
 # ==============================================================================
-# 4. BARRA LATERAL (ENTRADAS HÍBRIDAS: SLIDER + CASILLA NUMÉRICA)
+# 4. BARRA LATERAL (ENTRADAS HÍBRIDAS)
 # ==============================================================================
 st.sidebar.header("Parámetros de Entrada")
 
@@ -90,7 +90,7 @@ month = st.sidebar.selectbox("Mes", ["Jan", "Feb", "Mar", "May", "June", "Jul", 
 weekend = st.sidebar.radio("¿Fin de Semana?", [0, 1], format_func=lambda x: "Sí" if x == 1 else "No")
 
 # ==============================================================================
-# 5. PREPARACIÓN DE DATOS E INFERENCIA
+# 5. PREPARACIÓN DE DATOS E INFERENCIA EXACTA
 # ==============================================================================
 datos_entrada = {
     'Administrative': 0, 
@@ -119,7 +119,7 @@ if columnas_modelo is not None:
     df_input_encoded = df_input_encoded.reindex(columns=columnas_modelo, fill_value=0)
 
 # ==============================================================================
-# 6. DIAGNÓSTICO Y RECOMENDACIÓN PRESCRIPTIVA
+# 6. RESULTADO Y RECOMENDACIÓN PRESCRIPTIVA
 # ==============================================================================
 st.subheader("Resultado de Evaluación")
 
