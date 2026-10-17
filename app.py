@@ -30,17 +30,55 @@ def cargar_recursos():
 model, columnas_modelo = cargar_recursos()
 
 # ==============================================================================
-# 3. BARRA LATERAL (ENTRADAS DE NAVEGACIÓN)
+# 3. BARRA LATERAL (ENTRADAS DE NAVEGACIÓN CON VALORES EXACTOS)
 # ==============================================================================
 st.sidebar.header("Parámetros de Entrada")
 
-page_values = st.sidebar.slider("Valor de Página (PageValues)", 0.0, 360.0, 8.5, step=0.5)
-exit_rates = st.sidebar.slider("Tasa de Salida (ExitRates)", 0.00, 0.20, 0.035, step=0.005)
-bounce_rates = st.sidebar.slider("Tasa de Rebote (BounceRates)", 0.00, 0.20, 0.01, step=0.005)
+# Indicadores de comportamiento (Entradas numéricas directas)
+page_values = st.sidebar.number_input(
+    "Valor de Página (PageValues)", 
+    min_value=0.0, 
+    max_value=400.0, 
+    value=8.5, 
+    step=0.1, 
+    format="%.2f"
+)
+
+exit_rates = st.sidebar.number_input(
+    "Tasa de Salida (ExitRates)", 
+    min_value=0.000, 
+    max_value=1.000, 
+    value=0.035, 
+    step=0.001, 
+    format="%.3f"
+)
+
+bounce_rates = st.sidebar.number_input(
+    "Tasa de Rebote (BounceRates)", 
+    min_value=0.000, 
+    max_value=1.000, 
+    value=0.010, 
+    step=0.001, 
+    format="%.3f"
+)
 
 st.sidebar.subheader("Métricas de Navegación")
-product_related = st.sidebar.number_input("Páginas de Producto Visitadas", min_value=0, max_value=200, value=22)
-product_duration = st.sidebar.number_input("Tiempo en Páginas de Producto (seg)", min_value=0.0, max_value=10000.0, value=750.0, step=10.0)
+product_related = st.sidebar.number_input(
+    "Páginas de Producto Visitadas", 
+    min_value=0, 
+    max_value=1000, 
+    value=22, 
+    step=1
+)
+
+product_duration = st.sidebar.number_input(
+    "Tiempo en Páginas de Producto (seg)", 
+    min_value=0.0, 
+    max_value=50000.0, 
+    value=750.0, 
+    step=1.0, 
+    format="%.1f"
+)
 
 st.sidebar.subheader("Contexto de la Sesión")
 visitor_type = st.sidebar.selectbox("Tipo de Visitante", ["Returning_Visitor", "New_Visitor", "Other"])
